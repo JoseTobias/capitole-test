@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/mytheresa/go-hiring-challenge/app/domain"
 	"gorm.io/gorm"
 )
 
@@ -14,8 +15,8 @@ func NewProductsRepository(db *gorm.DB) *ProductsRepository {
 	}
 }
 
-func (r *ProductsRepository) GetAllProducts() ([]Product, error) {
-	var products []Product
+func (r *ProductsRepository) GetAllProducts() ([]domain.Product, error) {
+	var products []domain.Product
 	if err := r.db.Preload("Variants").Find(&products).Error; err != nil {
 		return nil, err
 	}

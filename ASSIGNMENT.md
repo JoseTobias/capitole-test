@@ -8,7 +8,7 @@ Writing Idiomatic Go code is crucial, so we will focus on clarity and simplicity
 
 ### Catalog endpoint
 
-1. Catalog endpoint depends on `models.ProductsRepository` to fetch products. Refactor this in a more idiomatic way.
+1. [ ] Catalog endpoint depends on `models.ProductsRepository` to fetch products. Refactor this in a more idiomatic way.
 
 2. Create a new model for Product Categories, and make sure products are linked to them based on the following:
 

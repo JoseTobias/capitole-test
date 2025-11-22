@@ -1,8 +1,6 @@
-package models
+package domain
 
-import (
-	"github.com/shopspring/decimal"
-)
+import "github.com/shopspring/decimal"
 
 // Product represents a product in the catalog.
 // It includes a unique code and a price.
@@ -15,4 +13,13 @@ type Product struct {
 
 func (p *Product) TableName() string {
 	return "products"
+}
+
+type ProductResponse struct {
+	Code  string  `json:"code"`
+	Price float64 `json:"price"`
+}
+
+type GetProductsResponse struct {
+	Products []ProductResponse `json:"products"`
 }

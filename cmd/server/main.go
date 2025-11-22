@@ -36,7 +36,8 @@ func main() {
 
 	// Initialize handlers
 	prodRepo := models.NewProductsRepository(db)
-	cat := catalog.NewCatalogHandler(prodRepo)
+	getProd := catalog.NewGetCatalog(prodRepo)
+	cat := catalog.NewCatalogHandler(getProd)
 
 	// Set up routing
 	mux := http.NewServeMux()

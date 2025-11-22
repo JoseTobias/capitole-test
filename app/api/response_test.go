@@ -1,6 +1,7 @@
 package api
 
 import (
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -26,6 +27,18 @@ func TestOKResponse(t *testing.T) {
 		expected := `{"message":"Success"}`
 		assert.JSONEq(t, expected, recorder.Body.String(), "Response body does not match expected")
 	})
+
+	t.Run("handle encoding error", func(t *testing.T) {
+		errWriter := &errorResponseWriter{
+			recorder: httptest.NewRecorder(),
+			writeErr: errors.New("write error"),
+		}
+
+		OKResponse(errWriter, sample)
+
+		assert.Equal(t, http.StatusOK, errWriter.recorder.Code, "Expected status code 200 OK even on encoding error")
+		assert.Equal(t, "application/json", errWriter.recorder.Header().Get("Content-Type"), "Expected Content-Type to be application/json")
+	})
 }
 
 func TestErrorResponse(t *testing.T) {
@@ -39,4 +52,37 @@ func TestErrorResponse(t *testing.T) {
 		expected := `{"error":"Some error occurred"}`
 		assert.JSONEq(t, expected, recorder.Body.String(), "Response body does not match expected")
 	})
+
+	t.Run("handle encoding error", func(t *testing.T) {
+		errWriter := &errorResponseWriter{
+			recorder: httptest.NewRecorder(),
+			writeErr: errors.New("write error"),
+		}
+
+		ErrorResponse(errWriter, http.StatusBadRequest, "Bad request")
+
+		assert.Equal(t, http.StatusBadRequest, errWriter.recorder.Code, "Expected status code 400 even on encoding error")
+		assert.Equal(t, "application/json", errWriter.recorder.Header().Get("Content-Type"), "Expected Content-Type to be application/json")
+	})
+}
+
+type errorResponseWriter struct {
+	recorder *httptest.ResponseRecorder
+	writeErr error
+	header   http.Header
+}
+
+func (e *errorResponseWriter) Header() http.Header {
+	if e.header == nil {
+		e.header = e.recorder.Header()
+	}
+	return e.header
+}
+
+func (e *errorResponseWriter) Write(b []byte) (int, error) {
+	return 0, e.writeErr
+}
+
+func (e *errorResponseWriter) WriteHeader(statusCode int) {
+	e.recorder.WriteHeader(statusCode)
 }

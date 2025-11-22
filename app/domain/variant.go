@@ -1,8 +1,6 @@
-package models
+package domain
 
-import (
-	"github.com/shopspring/decimal"
-)
+import "github.com/shopspring/decimal"
 
 // Variant represents a product variant in the catalog.
 // It includes a unique name, SKU, and an optional price.
