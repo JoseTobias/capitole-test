@@ -23,8 +23,9 @@ func (s *GetCatalog) Get() (*domain.GetProductsResponse, error) {
 	products := make([]domain.ProductResponse, len(res))
 	for i, p := range res {
 		products[i] = domain.ProductResponse{
-			Code:  p.Code,
-			Price: p.Price.InexactFloat64(),
+			Code:     p.Code,
+			Price:    p.Price.InexactFloat64(),
+			Category: p.Category,
 		}
 	}
 
