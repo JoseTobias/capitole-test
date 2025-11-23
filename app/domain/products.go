@@ -23,6 +23,33 @@ type ProductResponse struct {
 	Category Category `json:"category"`
 }
 
+type ProductsResponse struct {
+	Products []Product `json:"products"`
+	Paging   Paging    `json:"paging"`
+}
+
+type GetProductsRequest struct {
+	Limit  int64 `json:"-"`
+	Offset int64 `json:"-"`
+}
+
+func NewGetProductsRequest(q QueryGetter) *GetProductsRequest {
+	limitStr := q.Get("limit")
+	offsetStr := q.Get("offset")
+
+	if limitStr == "" {
+		limitStr = "10"
+	}
+	if offsetStr == "" {
+		offsetStr = "0"
+	}
+	return &GetProductsRequest{
+		Limit:  min(StringToInt64(limitStr), 100),
+		Offset: StringToInt64(offsetStr),
+	}
+}
+
 type GetProductsResponse struct {
 	Products []ProductResponse `json:"products"`
+	Paging   Paging            `json:"paging"`
 }

@@ -3,9 +3,9 @@ package catalog
 import "github.com/mytheresa/go-hiring-challenge/app/domain"
 
 type ProductGetter interface {
-	Get() (*domain.GetProductsResponse, error)
+	Get(request *domain.GetProductsRequest) (*domain.GetProductsResponse, error)
 }
 
 type ProductRepository interface {
-	GetAllProducts() ([]domain.Product, error)
+	GetAllProducts(request *domain.GetProductsRequest) (*domain.ProductsResponse, error)
 }

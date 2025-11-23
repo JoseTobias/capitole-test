@@ -2,6 +2,7 @@ package catalog
 
 import (
 	"encoding/json"
+	"github.com/mytheresa/go-hiring-challenge/app/domain"
 	"net/http"
 )
 
@@ -19,7 +20,9 @@ func (h *CatalogHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	// Return the products as a JSON response
 	w.Header().Set("Content-Type", "application/json")
 
-	res, err := h.productGetter.Get()
+	req := domain.NewGetProductsRequest(r.URL.Query())
+
+	res, err := h.productGetter.Get(req)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

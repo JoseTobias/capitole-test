@@ -15,13 +15,30 @@ func NewProductsRepository(db *gorm.DB) *ProductsRepository {
 	}
 }
 
-func (r *ProductsRepository) GetAllProducts() ([]domain.Product, error) {
-	var products []domain.Product
+func (r *ProductsRepository) GetAllProducts(req *domain.GetProductsRequest) (*domain.ProductsResponse, error) {
+	var (
+		products []domain.Product
+		total    int64
+	)
+
+	if err := r.db.Model(&domain.Product{}).Count(&total).Error; err != nil {
+		return nil, err
+	}
+
 	if err := r.db.
 		Preload("Variants").
 		Preload("Category").
+		Limit(int(req.Limit)).
+		Offset(int(req.Offset)).
 		Find(&products).Error; err != nil {
 		return nil, err
 	}
-	return products, nil
+	return &domain.ProductsResponse{
+		Products: products,
+		Paging: domain.Paging{
+			Total:  total,
+			Offset: req.Offset,
+			Limit:  req.Limit,
+		},
+	}, nil
 }

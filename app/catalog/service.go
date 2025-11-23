@@ -14,14 +14,14 @@ func NewGetCatalog(r ProductRepository) *GetCatalog {
 	}
 }
 
-func (s *GetCatalog) Get() (*domain.GetProductsResponse, error) {
-	res, err := s.repository.GetAllProducts()
+func (s *GetCatalog) Get(req *domain.GetProductsRequest) (*domain.GetProductsResponse, error) {
+	prd, err := s.repository.GetAllProducts(req)
 	if err != nil {
 		return nil, err
 	}
 
-	products := make([]domain.ProductResponse, len(res))
-	for i, p := range res {
+	products := make([]domain.ProductResponse, len(prd.Products))
+	for i, p := range prd.Products {
 		products[i] = domain.ProductResponse{
 			Code:     p.Code,
 			Price:    p.Price.InexactFloat64(),
@@ -29,8 +29,9 @@ func (s *GetCatalog) Get() (*domain.GetProductsResponse, error) {
 		}
 	}
 
-	re := &domain.GetProductsResponse{
+	res := &domain.GetProductsResponse{
 		Products: products,
+		Paging:   prd.Paging,
 	}
-	return re, err
+	return res, err
 }
