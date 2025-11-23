@@ -21,22 +21,32 @@ func (r *ProductsRepository) GetAllProducts(req *domain.GetProductsRequest) (*do
 		total    int64
 	)
 
-	if err := r.db.Model(&domain.Product{}).Count(&total).Error; err != nil {
+	baseQuery := r.db.Model(&domain.Product{})
+
+	if req.CategoryID > 0 {
+		baseQuery.Where("category_id = ?", req.CategoryID)
+	}
+
+	if !req.Price.IsZero() {
+		baseQuery.Where("price < ?", req.Price)
+	}
+
+	if err := baseQuery.Count(&total).Error; err != nil {
 		return nil, err
 	}
 
-	if err := r.db.
+	if err := baseQuery.
 		Preload("Variants").
 		Preload("Category").
-		Limit(int(req.Limit)).
-		Offset(int(req.Offset)).
+		Limit(req.Limit).
+		Offset(req.Offset).
 		Find(&products).Error; err != nil {
 		return nil, err
 	}
 	return &domain.ProductsResponse{
 		Products: products,
 		Paging: domain.Paging{
-			Total:  total,
+			Total:  int(total),
 			Offset: req.Offset,
 			Limit:  req.Limit,
 		},

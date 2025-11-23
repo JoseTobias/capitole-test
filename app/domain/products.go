@@ -29,23 +29,20 @@ type ProductsResponse struct {
 }
 
 type GetProductsRequest struct {
-	Limit  int64 `json:"-"`
-	Offset int64 `json:"-"`
+	Price      decimal.Decimal `json:"price"`
+	CategoryID uint            `json:"category_id"`
+	Limit      int             `json:"-"`
+	Offset     int             `json:"-"`
 }
 
 func NewGetProductsRequest(q QueryGetter) *GetProductsRequest {
 	limitStr := q.Get("limit")
 	offsetStr := q.Get("offset")
-
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	if offsetStr == "" {
-		offsetStr = "0"
-	}
 	return &GetProductsRequest{
-		Limit:  min(StringToInt64(limitStr), 100),
-		Offset: StringToInt64(offsetStr),
+		Price:      StringToDecimal(q.Get("price")),
+		CategoryID: StringToUint(q.Get("category_id")),
+		Limit:      min(StringToInt(limitStr, 10), 100),
+		Offset:     StringToInt(offsetStr, 0),
 	}
 }
 
