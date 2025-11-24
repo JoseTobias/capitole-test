@@ -1,4 +1,4 @@
-package catalog
+package catalogget
 
 import (
 	"github.com/mytheresa/go-hiring-challenge/app/api"

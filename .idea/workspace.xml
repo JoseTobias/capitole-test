@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c6e375cc-63e8-4dfb-9021-b7eeb0a64b93" name="Changes" comment="chore: remove idea">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/handlers/catalogget/interfaces.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/catalog/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handlers/catalogget/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/catalog/interfaces.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/usecase/getcatalog/interfaces.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/catalog/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/usecase/getcatalog/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/main.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.25.1.darwin-arm64" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="35fLCAgqroSskmuNXETPQt657ji" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Test.TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestService_GetCatalogByCode/Success_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tobiassouza/Documents/git/vagas/testes/go-hiring-challenge-1.2.0/sql&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sql" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/usecase/getcatalog" />
+      <recent name="$PROJECT_DIR$/app/handlers/getcatalog" />
+      <recent name="$PROJECT_DIR$/app/usecase/catalogbyid" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode">
+    <configuration name="TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-hiring-challenge-1.2.0" />
+      <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestService_GetCatalogByCode\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestService_GetCatalogByCode/Error_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-hiring-challenge-1.2.0" />
+      <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestService_GetCatalogByCode\E$/^\QError_when_getting_product_by_code\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestService_GetCatalogByCode/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-hiring-challenge-1.2.0" />
+      <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestService_GetCatalogByCode\E$/^\QError_when_getting_product_by_code_not_found\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestService_GetCatalogByCode/Success_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-hiring-challenge-1.2.0" />
+      <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestService_GetCatalogByCode\E$/^\QSuccess_when_getting_product_by_code\E$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+        <item itemvalue="Go Test.TestService_GetCatalogByCode/Success_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+        <item itemvalue="Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+        <item itemvalue="Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-5df93f7ad4aa-df9ad98b711f-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-242.26775.26" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-GO-242.26775.26" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: add categories" />
+    <MESSAGE value="feat: add pagination" />
+    <MESSAGE value="feat: add filters" />
+    <MESSAGE value="refactor: add tested interfaces in handler" />
+    <MESSAGE value="feat: add catalog by code" />
+    <MESSAGE value="refactor: fix service and handle name" />
+    <MESSAGE value="fix: fix error handling" />
+    <MESSAGE value="fix: string price on get code" />
+    <MESSAGE value="test: add test to get catalog by code" />
+    <MESSAGE value="chore: remove idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: remove idea" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

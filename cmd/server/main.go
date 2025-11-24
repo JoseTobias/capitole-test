@@ -3,8 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/mytheresa/go-hiring-challenge/app/handlers/catalogget"
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
+	"github.com/mytheresa/go-hiring-challenge/app/usecase/getcatalog"
 	"log"
 	"net/http"
 	"os"
@@ -12,7 +14,6 @@ import (
 	"syscall"
 
 	"github.com/joho/godotenv"
-	"github.com/mytheresa/go-hiring-challenge/app/catalog"
 	"github.com/mytheresa/go-hiring-challenge/app/database"
 	"github.com/mytheresa/go-hiring-challenge/models"
 )
@@ -38,8 +39,8 @@ func main() {
 
 	// Initialize handlers
 	prodRepo := models.NewProductsRepository(db)
-	getProd := catalog.NewGetCatalog(prodRepo)
-	cat := catalog.NewCatalogHandler(getProd)
+	getProd := getcatalog.NewGetCatalog(prodRepo)
+	cat := catalogget.NewCatalogHandler(getProd)
 
 	getByCode := catalogbycode.NewGetCatalog(prodRepo)
 	prd := getcatalogbycode.NewCatalogHandler(getByCode)
