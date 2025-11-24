@@ -16,7 +16,7 @@ func NewGetCatalog(r CatalogRepository) *GetCatalogByCode {
 	}
 }
 
-func (s *GetCatalogByCode) GetByCode(code string) (*domain.Product, error) {
+func (s *GetCatalogByCode) GetByCode(code string) (*domain.ProductResponse, error) {
 	prd, err := s.repository.GetProductByCode(code)
 	if err != nil {
 		if errors.Is(err, models.ErrProductNotFound) {
@@ -26,22 +26,27 @@ func (s *GetCatalogByCode) GetByCode(code string) (*domain.Product, error) {
 		return nil, err
 	}
 
-	variants := make([]domain.Variant, len(prd.Variants))
+	variants := make([]domain.VariantResponse, len(prd.Variants))
 	for i, v := range prd.Variants {
 		price := v.Price
 		if price.IsZero() {
 			price = prd.Price
 		}
-		variants[i] = domain.Variant{
+		variants[i] = domain.VariantResponse{
 			ID:        v.ID,
 			ProductID: v.ProductID,
 			Name:      v.Name,
 			SKU:       v.SKU,
-			Price:     price,
+			Price:     price.InexactFloat64(),
 		}
 	}
 
-	prd.Variants = variants
+	res := &domain.ProductResponse{
+		Code:     prd.Code,
+		Price:    prd.Price.InexactFloat64(),
+		Category: prd.Category,
+		Variants: variants,
+	}
 
-	return prd, err
+	return res, err
 }

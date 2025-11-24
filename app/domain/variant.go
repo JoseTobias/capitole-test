@@ -13,6 +13,14 @@ type Variant struct {
 	Price     decimal.Decimal `json:"price" gorm:"type:decimal(10,2);null"`
 }
 
+type VariantResponse struct {
+	ID        uint    `json:"id"`
+	ProductID uint    `json:"productID"`
+	Name      string  `json:"name"`
+	SKU       string  `json:"SKU"`
+	Price     float64 `json:"price"`
+}
+
 func (v *Variant) TableName() string {
 	return "product_variants"
 }

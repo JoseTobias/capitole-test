@@ -18,9 +18,10 @@ func (p *Product) TableName() string {
 }
 
 type ProductResponse struct {
-	Code     string   `json:"code"`
-	Price    float64  `json:"price"`
-	Category Category `json:"category"`
+	Code     string            `json:"code"`
+	Price    float64           `json:"price"`
+	Category Category          `json:"category"`
+	Variants []VariantResponse `json:"variants,omitempty"`
 }
 
 type ProductsResponse struct {
