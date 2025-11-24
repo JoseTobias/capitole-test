@@ -6,8 +6,11 @@ import (
 	"github.com/mytheresa/go-hiring-challenge/app/api"
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/catalogget"
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/cataloggetbycode"
+	"github.com/mytheresa/go-hiring-challenge/app/handlers/categoriesget"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/getcatalog"
+	"github.com/mytheresa/go-hiring-challenge/app/usecase/getcategories"
+	"github.com/mytheresa/go-hiring-challenge/repositories/categories"
 	"github.com/mytheresa/go-hiring-challenge/repositories/products"
 	"log"
 	"net/http"
@@ -41,17 +44,21 @@ func main() {
 	// Initialize handlers
 	httpresp := api.NewHttpResponder()
 	prodRepo := products.NewProductsRepository(db)
+	cat := categories.NewRepository(db)
 	getProd := getcatalog.NewGetCatalog(prodRepo)
-	cat := catalogget.NewCatalogHandler(getProd, httpresp)
+	ctlg := catalogget.NewCatalogHandler(getProd, httpresp)
 
 	getByCode := catalogbycode.NewGetCatalog(prodRepo)
 	prd := cataloggetbycode.NewCatalogHandler(getByCode, httpresp)
 
+	getCat := getcategories.NewGetCatalog(cat)
+	catGet := categoriesget.NewHandler(getCat, httpresp)
+
 	// Set up routing
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /catalog", cat.HandleGet)
+	mux.HandleFunc("GET /catalog", ctlg.HandleGet)
 	mux.HandleFunc("GET /catalog/{code}", prd.HandleGet)
-	mux.HandleFunc("GET /categories", prd.HandleGet)
+	mux.HandleFunc("GET /categories", catGet.HandleGet)
 
 	// Set up the HTTP server
 	srv := &http.Server{
