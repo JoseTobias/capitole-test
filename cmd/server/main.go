@@ -8,6 +8,7 @@ import (
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/cataloggetbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/getcatalog"
+	"github.com/mytheresa/go-hiring-challenge/models/products"
 	"log"
 	"net/http"
 	"os"
@@ -16,7 +17,6 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/mytheresa/go-hiring-challenge/app/database"
-	"github.com/mytheresa/go-hiring-challenge/models"
 )
 
 func main() {
@@ -40,7 +40,7 @@ func main() {
 
 	// Initialize handlers
 	httpresp := api.NewHttpResponder()
-	prodRepo := models.NewProductsRepository(db)
+	prodRepo := products.NewProductsRepository(db)
 	getProd := getcatalog.NewGetCatalog(prodRepo)
 	cat := catalogget.NewCatalogHandler(getProd, httpresp)
 

@@ -3,7 +3,7 @@ package catalogbycode
 import (
 	"errors"
 	"github.com/mytheresa/go-hiring-challenge/app/domain"
-	"github.com/mytheresa/go-hiring-challenge/models"
+	"github.com/mytheresa/go-hiring-challenge/models/products"
 )
 
 type GetCatalogByCode struct {
@@ -19,7 +19,7 @@ func NewGetCatalog(r CatalogRepository) *GetCatalogByCode {
 func (s *GetCatalogByCode) GetByCode(code string) (*domain.ProductResponse, error) {
 	prd, err := s.repository.GetProductByCode(code)
 	if err != nil {
-		if errors.Is(err, models.ErrProductNotFound) {
+		if errors.Is(err, products.ErrProductNotFound) {
 			return nil, ErrProductNotFound
 		}
 
