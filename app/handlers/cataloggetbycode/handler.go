@@ -1,4 +1,4 @@
-package getcatalogbycode
+package cataloggetbycode
 
 import (
 	"errors"

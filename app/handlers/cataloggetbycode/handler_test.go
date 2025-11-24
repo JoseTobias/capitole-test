@@ -1,4 +1,4 @@
-package getcatalogbycode
+package cataloggetbycode
 
 import (
 	"errors"
@@ -8,7 +8,7 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/mytheresa/go-hiring-challenge/app/domain"
-	"github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode/mock"
+	"github.com/mytheresa/go-hiring-challenge/app/handlers/cataloggetbycode/mock"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
 	"github.com/stretchr/testify/assert"
 )
