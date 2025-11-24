@@ -1,7 +1,7 @@
 package catalog
 
 import (
-	"encoding/json"
+	"github.com/mytheresa/go-hiring-challenge/app/api"
 	"github.com/mytheresa/go-hiring-challenge/app/domain"
 	"net/http"
 )
@@ -17,19 +17,13 @@ func NewCatalogHandler(r ProductGetter) *CatalogHandler {
 }
 
 func (h *CatalogHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
-	// Return the products as a JSON response
-	w.Header().Set("Content-Type", "application/json")
-
 	req := domain.NewGetProductsRequest(r.URL.Query())
 
 	res, err := h.productGetter.Get(req)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		api.ErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	if err := json.NewEncoder(w).Encode(res); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	api.OKResponse(w, res)
 }
