@@ -3,7 +3,7 @@ package catalogbycode
 import (
 	"errors"
 	"github.com/mytheresa/go-hiring-challenge/app/domain"
-	"github.com/mytheresa/go-hiring-challenge/models/products"
+	"github.com/mytheresa/go-hiring-challenge/repositories/products"
 )
 
 type GetCatalogByCode struct {

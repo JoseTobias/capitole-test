@@ -8,7 +8,7 @@ import (
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/cataloggetbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/getcatalog"
-	"github.com/mytheresa/go-hiring-challenge/models/products"
+	"github.com/mytheresa/go-hiring-challenge/repositories/products"
 	"log"
 	"net/http"
 	"os"

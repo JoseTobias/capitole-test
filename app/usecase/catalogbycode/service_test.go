@@ -5,7 +5,7 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/mytheresa/go-hiring-challenge/app/domain"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode/mock"
-	"github.com/mytheresa/go-hiring-challenge/models"
+	"github.com/mytheresa/go-hiring-challenge/repositories/products"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -62,7 +62,7 @@ func TestService_GetCatalogByCode(t *testing.T) {
 				ctrl := gomock.NewController(t)
 				repo := mock.NewMockCatalogRepository(ctrl)
 
-				repo.EXPECT().GetProductByCode("TEST_CODE_NOT_FOUND").Return(nil, models.ErrProductNotFound)
+				repo.EXPECT().GetProductByCode("TEST_CODE_NOT_FOUND").Return(nil, products.ErrProductNotFound)
 
 				return &mockOptions{
 					repository: repo,
