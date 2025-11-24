@@ -1,4 +1,4 @@
-package getcatalogbyid
+package getcatalogbycode
 
 import (
 	"github.com/mytheresa/go-hiring-challenge/app/api"

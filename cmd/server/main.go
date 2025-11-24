@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbyid"
-	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbyid"
+	"github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode"
+	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
 	"log"
 	"net/http"
 	"os"
@@ -41,8 +41,8 @@ func main() {
 	getProd := catalog.NewGetCatalog(prodRepo)
 	cat := catalog.NewCatalogHandler(getProd)
 
-	getByCode := catalogbyid.NewGetCatalog(prodRepo)
-	prd := getcatalogbyid.NewCatalogHandler(getByCode)
+	getByCode := catalogbycode.NewGetCatalog(prodRepo)
+	prd := getcatalogbycode.NewCatalogHandler(getByCode)
 
 	// Set up routing
 	mux := http.NewServeMux()

@@ -1,4 +1,4 @@
-package catalogbyid
+package catalogbycode
 
 import (
 	"errors"
