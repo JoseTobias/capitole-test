@@ -105,6 +105,55 @@ func TestService_GetCatalogByCode(t *testing.T) {
 				}
 			},
 		},
+		{
+			name: "Success when getting product by code without price",
+			args: args{
+				input: "TEST_CODE",
+			},
+			want: want{
+				res: &domain.ProductResponse{
+					Code:  "TEST_CODE",
+					Price: 10.0,
+					Category: domain.Category{
+						ID:   123,
+						Code: "CATEGORY_CODE",
+						Name: "Test",
+					},
+					Variants: []domain.VariantResponse{
+						domain.VariantResponse{
+							Name:  "variant name",
+							SKU:   "sku",
+							Price: 10,
+						},
+					},
+				},
+			},
+			mocks: func(t *testing.T, args args, want want) *mockOptions {
+				ctrl := gomock.NewController(t)
+				repo := mock.NewMockCatalogRepository(ctrl)
+
+				repo.EXPECT().GetProductByCode("TEST_CODE").Return(&domain.Product{
+					Code:  "TEST_CODE",
+					Price: decimal.NewFromInt(10),
+					Category: domain.Category{
+						ID:   123,
+						Code: "CATEGORY_CODE",
+						Name: "Test",
+					},
+
+					Variants: []domain.Variant{
+						domain.Variant{
+							Name: "variant name",
+							SKU:  "sku",
+						},
+					},
+				}, nil)
+
+				return &mockOptions{
+					repository: repo,
+				}
+			},
+		},
 	}
 
 	for _, test := range tests {
