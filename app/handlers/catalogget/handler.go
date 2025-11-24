@@ -1,18 +1,19 @@
 package catalogget
 
 import (
-	"github.com/mytheresa/go-hiring-challenge/app/api"
 	"github.com/mytheresa/go-hiring-challenge/app/domain"
 	"net/http"
 )
 
 type CatalogHandler struct {
 	productGetter ProductGetter
+	responder     Responder
 }
 
-func NewCatalogHandler(r ProductGetter) *CatalogHandler {
+func NewCatalogHandler(r ProductGetter, resp Responder) *CatalogHandler {
 	return &CatalogHandler{
 		productGetter: r,
+		responder:     resp,
 	}
 }
 
@@ -21,9 +22,9 @@ func (h *CatalogHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 
 	res, err := h.productGetter.Get(req)
 	if err != nil {
-		api.ErrorResponse(w, http.StatusInternalServerError, err.Error())
+		h.responder.Error(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	api.OKResponse(w, res)
+	h.responder.Ok(w, res)
 }

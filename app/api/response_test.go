@@ -9,61 +9,157 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestOKResponse(t *testing.T) {
-
-	type sampleResponse struct {
-		Message string `json:"message"`
-	}
-
-	sample := sampleResponse{Message: "Success"}
-
-	t.Run("succesful http200 json response", func(t *testing.T) {
-		recorder := httptest.NewRecorder()
-		OKResponse(recorder, sample)
-
-		assert.Equal(t, http.StatusOK, recorder.Code, "Expected status code 200 OK")
-		assert.Equal(t, "application/json", recorder.Header().Get("Content-Type"), "Expected Content-Type to be application/json")
-
-		expected := `{"message":"Success"}`
-		assert.JSONEq(t, expected, recorder.Body.String(), "Response body does not match expected")
-	})
-
-	t.Run("handle encoding error", func(t *testing.T) {
-		errWriter := &errorResponseWriter{
-			recorder: httptest.NewRecorder(),
-			writeErr: errors.New("write error"),
-		}
-
-		OKResponse(errWriter, sample)
-
-		assert.Equal(t, http.StatusOK, errWriter.recorder.Code, "Expected status code 200 OK even on encoding error")
-		assert.Equal(t, "application/json", errWriter.recorder.Header().Get("Content-Type"), "Expected Content-Type to be application/json")
-	})
+type sampleResponse struct {
+	Message string `json:"message"`
 }
 
-func TestErrorResponse(t *testing.T) {
-	t.Run("json response for a given http status code", func(t *testing.T) {
-		recorder := httptest.NewRecorder()
-		ErrorResponse(recorder, http.StatusInternalServerError, "Some error occurred")
+func TestHttpResponder_Ok(t *testing.T) {
+	type args struct {
+		data any
+	}
+	type want struct {
+		statusCode  int
+		contentType string
+		body        string
+		hasError    bool
+	}
+	tests := []struct {
+		name  string
+		args  args
+		want  want
+		setup func(t *testing.T, args args) http.ResponseWriter
+	}{
+		{
+			name: "succesful http200 json response",
+			args: args{
+				data: sampleResponse{Message: "Success"},
+			},
+			want: want{
+				statusCode:  http.StatusOK,
+				contentType: "application/json",
+				body:        `{"message":"Success"}`,
+				hasError:    false,
+			},
+			setup: func(t *testing.T, args args) http.ResponseWriter {
+				return httptest.NewRecorder()
+			},
+		},
+		{
+			name: "handle encoding error",
+			args: args{
+				data: sampleResponse{Message: "Success"},
+			},
+			want: want{
+				statusCode:  http.StatusOK,
+				contentType: "application/json",
+				hasError:    true,
+			},
+			setup: func(t *testing.T, args args) http.ResponseWriter {
+				return &errorResponseWriter{
+					recorder: httptest.NewRecorder(),
+					writeErr: errors.New("write error"),
+				}
+			},
+		},
+	}
 
-		assert.Equal(t, http.StatusInternalServerError, recorder.Code, "Expected status code 500 Internal Server Error")
-		assert.Equal(t, "application/json", recorder.Header().Get("Content-Type"), "Expected Content-Type to be application/json")
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			responder := NewHttpResponder()
+			w := test.setup(t, test.args)
 
-		expected := `{"error":"Some error occurred"}`
-		assert.JSONEq(t, expected, recorder.Body.String(), "Response body does not match expected")
-	})
+			responder.Ok(w, test.args.data)
 
-	t.Run("handle encoding error", func(t *testing.T) {
-		errWriter := &errorResponseWriter{
-			recorder: httptest.NewRecorder(),
-			writeErr: errors.New("write error"),
-		}
+			a := assert.New(t)
 
-		ErrorResponse(errWriter, http.StatusBadRequest, "Bad request")
+			if errWriter, ok := w.(*errorResponseWriter); ok {
+				a.Equal(test.want.statusCode, errWriter.recorder.Code, "Expected status code to match")
+				a.Equal(test.want.contentType, errWriter.recorder.Header().Get("Content-Type"), "Expected Content-Type to match")
+			} else if recorder, ok := w.(*httptest.ResponseRecorder); ok {
+				a.Equal(test.want.statusCode, recorder.Code, "Expected status code to match")
+				a.Equal(test.want.contentType, recorder.Header().Get("Content-Type"), "Expected Content-Type to match")
+				if test.want.body != "" {
+					a.JSONEq(test.want.body, recorder.Body.String(), "Response body does not match expected")
+				}
+			}
+		})
+	}
+}
 
-		assert.Equal(t, http.StatusBadRequest, errWriter.recorder.Code, "Expected status code 400 even on encoding error")
-		assert.Equal(t, "application/json", errWriter.recorder.Header().Get("Content-Type"), "Expected Content-Type to be application/json")
-	})
+func TestHttpResponder_Error(t *testing.T) {
+	type args struct {
+		status  int
+		message string
+	}
+	type want struct {
+		statusCode  int
+		contentType string
+		body        string
+		hasError    bool
+	}
+	tests := []struct {
+		name  string
+		args  args
+		want  want
+		setup func(t *testing.T, args args) http.ResponseWriter
+	}{
+		{
+			name: "json response for a given http status code",
+			args: args{
+				status:  http.StatusInternalServerError,
+				message: "Some error occurred",
+			},
+			want: want{
+				statusCode:  http.StatusInternalServerError,
+				contentType: "application/json",
+				body:        `{"error":"Some error occurred"}`,
+				hasError:    false,
+			},
+			setup: func(t *testing.T, args args) http.ResponseWriter {
+				return httptest.NewRecorder()
+			},
+		},
+		{
+			name: "handle encoding error",
+			args: args{
+				status:  http.StatusBadRequest,
+				message: "Bad request",
+			},
+			want: want{
+				statusCode:  http.StatusBadRequest,
+				contentType: "application/json",
+				hasError:    true,
+			},
+			setup: func(t *testing.T, args args) http.ResponseWriter {
+				return &errorResponseWriter{
+					recorder: httptest.NewRecorder(),
+					writeErr: errors.New("write error"),
+				}
+			},
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			responder := NewHttpResponder()
+			w := test.setup(t, test.args)
+
+			responder.Error(w, test.args.status, test.args.message)
+
+			a := assert.New(t)
+
+			if errWriter, ok := w.(*errorResponseWriter); ok {
+				a.Equal(test.want.statusCode, errWriter.recorder.Code, "Expected status code to match")
+				a.Equal(test.want.contentType, errWriter.recorder.Header().Get("Content-Type"), "Expected Content-Type to match")
+			} else if recorder, ok := w.(*httptest.ResponseRecorder); ok {
+				a.Equal(test.want.statusCode, recorder.Code, "Expected status code to match")
+				a.Equal(test.want.contentType, recorder.Header().Get("Content-Type"), "Expected Content-Type to match")
+				if test.want.body != "" {
+					a.JSONEq(test.want.body, recorder.Body.String(), "Response body does not match expected")
+				}
+			}
+		})
+	}
 }
 
 type errorResponseWriter struct {

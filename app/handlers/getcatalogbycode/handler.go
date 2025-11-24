@@ -2,18 +2,19 @@ package getcatalogbycode
 
 import (
 	"errors"
-	"github.com/mytheresa/go-hiring-challenge/app/api"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
 	"net/http"
 )
 
 type Handler struct {
-	getter GetCatalogByCode
+	getter    GetCatalogByCode
+	responder Responder
 }
 
-func NewCatalogHandler(r GetCatalogByCode) *Handler {
+func NewCatalogHandler(r GetCatalogByCode, resp Responder) *Handler {
 	return &Handler{
-		getter: r,
+		getter:    r,
+		responder: resp,
 	}
 }
 
@@ -22,12 +23,13 @@ func (h *Handler) HandleGet(w http.ResponseWriter, r *http.Request) {
 	res, err := h.getter.GetByCode(code)
 	if err != nil {
 		if errors.Is(err, catalogbycode.ErrProductNotFound) {
-			api.ErrorResponse(w, http.StatusNotFound, err.Error())
+			h.responder.Error(w, http.StatusNotFound, err.Error())
+			return
 		}
 
-		api.ErrorResponse(w, http.StatusInternalServerError, err.Error())
+		h.responder.Error(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	api.OKResponse(w, res)
+	h.responder.Ok(w, res)
 }

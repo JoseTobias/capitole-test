@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/mytheresa/go-hiring-challenge/app/api"
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/catalogget"
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
@@ -38,12 +39,13 @@ func main() {
 	defer close()
 
 	// Initialize handlers
+	httpresp := api.NewHttpResponder()
 	prodRepo := models.NewProductsRepository(db)
 	getProd := getcatalog.NewGetCatalog(prodRepo)
-	cat := catalogget.NewCatalogHandler(getProd)
+	cat := catalogget.NewCatalogHandler(getProd, httpresp)
 
 	getByCode := catalogbycode.NewGetCatalog(prodRepo)
-	prd := getcatalogbycode.NewCatalogHandler(getByCode)
+	prd := getcatalogbycode.NewCatalogHandler(getByCode, httpresp)
 
 	// Set up routing
 	mux := http.NewServeMux()
