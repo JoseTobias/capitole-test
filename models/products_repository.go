@@ -36,7 +36,6 @@ func (r *ProductsRepository) GetAllProducts(req *domain.GetProductsRequest) (*do
 	}
 
 	if err := baseQuery.
-		Preload("Variants").
 		Preload("Category").
 		Limit(req.Limit).
 		Offset(req.Offset).
@@ -51,4 +50,22 @@ func (r *ProductsRepository) GetAllProducts(req *domain.GetProductsRequest) (*do
 			Limit:  req.Limit,
 		},
 	}, nil
+}
+
+func (r *ProductsRepository) GetProductByCode(code string) (*domain.Product, error) {
+	var prd domain.Product
+
+	if err := r.db.Model(&prd).
+		Preload("Variants").
+		Preload("Category").
+		First(&prd, "code = ?", code).
+		Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, ErrProductNotFound
+		}
+
+		return nil, err
+	}
+
+	return &prd, nil
 }

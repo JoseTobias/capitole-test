@@ -5,12 +5,12 @@ import "github.com/shopspring/decimal"
 // Product represents a product in the catalog.
 // It includes a unique code and a price.
 type Product struct {
-	ID         uint            `gorm:"primaryKey"`
-	Code       string          `gorm:"uniqueIndex;not null"`
-	Price      decimal.Decimal `gorm:"type:decimal(10,2);not null"`
-	Variants   []Variant       `gorm:"foreignKey:ProductID"`
-	CategoryID uint            `gorm:"not null"`
-	Category   Category        `gorm:"foreignKey:CategoryID;references:ID"`
+	ID         uint            `json:"id" gorm:"primaryKey"`
+	Code       string          `json:"code" gorm:"uniqueIndex;not null"`
+	Price      decimal.Decimal `json:"price" gorm:"type:decimal(10,2);not null"`
+	Variants   []Variant       `json:"variants" gorm:"foreignKey:ProductID"`
+	CategoryID uint            `json:"categoryID" gorm:"not null"`
+	Category   Category        `json:"category" gorm:"foreignKey:CategoryID;references:ID"`
 }
 
 func (p *Product) TableName() string {
