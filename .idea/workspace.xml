@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6e375cc-63e8-4dfb-9021-b7eeb0a64b93" name="Changes" comment="chore: remove idea">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handlers/catalogget/interfaces.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/catalog/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handlers/catalogget/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/catalog/interfaces.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/usecase/getcatalog/interfaces.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/catalog/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/usecase/getcatalog/service.go" afterDir="false" />
+    <list default="true" id="c6e375cc-63e8-4dfb-9021-b7eeb0a64b93" name="Changes" comment="test: get all categories">
+      <change afterPath="$PROJECT_DIR$/app/handlers/categorycreate/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/handlers/categorycreate/interfaces.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/usecase/createcategory/errors.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/usecase/createcategory/interfaces.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/usecase/createcategory/service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repositories/categories/errors.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/category.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/domain/category.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/categories/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/categories/repository.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,10 +53,18 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Go Test.TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestHandler_HandleGet in github.com/mytheresa/go-hiring-challenge/app/handlers/categoriesget.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestHandler_HandleGet in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode.executor&quot;: &quot;Coverage&quot;,
+    &quot;Go Test.TestHandler_HandleGet/Error_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestHandler_HandleGet/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Test.TestHttpResponder_Error in github.com/mytheresa/go-hiring-challenge/app/api.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestHttpResponder_Ok in github.com/mytheresa/go-hiring-challenge/app/api.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestService_Get in github.com/mytheresa/go-hiring-challenge/app/usecase/getcategories.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Coverage&quot;,
     &quot;Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
     &quot;Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
     &quot;Go Test.TestService_GetCatalogByCode/Success_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestService_GetCatalogByCode/Success_when_getting_product_by_code_without_price in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
@@ -69,12 +83,49 @@
       <recent name="$PROJECT_DIR$/sql" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models/products" />
       <recent name="$PROJECT_DIR$/app/usecase/getcatalog" />
       <recent name="$PROJECT_DIR$/app/handlers/getcatalog" />
       <recent name="$PROJECT_DIR$/app/usecase/catalogbyid" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode">
+  <component name="RunManager" selected="Go Test.TestService_Get in github.com/mytheresa/go-hiring-challenge/app/usecase/getcategories">
+    <configuration name="TestHandler_HandleGet in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-hiring-challenge-1.2.0" />
+      <working_directory value="$PROJECT_DIR$/app/handlers/getcatalogbycode" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestHandler_HandleGet\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestHandler_HandleGet/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-hiring-challenge-1.2.0" />
+      <working_directory value="$PROJECT_DIR$/app/handlers/getcatalogbycode" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestHandler_HandleGet\E$/^\QError_when_getting_product_by_code_not_found\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestService_Get in github.com/mytheresa/go-hiring-challenge/app/usecase/getcategories" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-hiring-challenge-1.2.0" />
+      <working_directory value="$PROJECT_DIR$/app/usecase/getcategories" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/mytheresa/go-hiring-challenge/app/usecase/getcategories" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestService_Get\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-hiring-challenge-1.2.0" />
       <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
@@ -87,7 +138,7 @@
       <pattern value="^\QTestService_GetCatalogByCode\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestService_GetCatalogByCode/Error_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestService_GetCatalogByCode/Success_when_getting_product_by_code_without_price in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-hiring-challenge-1.2.0" />
       <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
       <root_directory value="$PROJECT_DIR$" />
@@ -96,39 +147,16 @@
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestService_GetCatalogByCode\E$/^\QError_when_getting_product_by_code\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestService_GetCatalogByCode/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="go-hiring-challenge-1.2.0" />
-      <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestService_GetCatalogByCode\E$/^\QError_when_getting_product_by_code_not_found\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestService_GetCatalogByCode/Success_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="go-hiring-challenge-1.2.0" />
-      <working_directory value="$PROJECT_DIR$/app/usecase/catalogbycode" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestService_GetCatalogByCode\E$/^\QSuccess_when_getting_product_by_code\E$" />
+      <pattern value="^\QTestService_GetCatalogByCode\E$/^\QSuccess_when_getting_product_by_code_without_price\E$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestService_Get in github.com/mytheresa/go-hiring-challenge/app/usecase/getcategories" />
+        <item itemvalue="Go Test.TestHandler_HandleGet in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode" />
+        <item itemvalue="Go Test.TestHandler_HandleGet/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode" />
         <item itemvalue="Go Test.TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
-        <item itemvalue="Go Test.TestService_GetCatalogByCode/Success_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
-        <item itemvalue="Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code_not_found in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
-        <item itemvalue="Go Test.TestService_GetCatalogByCode/Error_when_getting_product_by_code in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
+        <item itemvalue="Go Test.TestService_GetCatalogByCode/Success_when_getting_product_by_code_without_price in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode" />
       </list>
     </recent_temporary>
   </component>
@@ -155,9 +183,33 @@
     <MESSAGE value="fix: string price on get code" />
     <MESSAGE value="test: add test to get catalog by code" />
     <MESSAGE value="chore: remove idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: remove idea" />
+    <MESSAGE value="refactor: refactor catalog folders" />
+    <MESSAGE value="test: increase product by code coverage" />
+    <MESSAGE value="refactor: apply DI to api functions" />
+    <MESSAGE value="tests: add get by code handlers tests" />
+    <MESSAGE value="refactor: rename handle module" />
+    <MESSAGE value="refactor: move repository to other folder" />
+    <MESSAGE value="refactor: rename modules" />
+    <MESSAGE value="feat: get all categories" />
+    <MESSAGE value="test: get all categories" />
+    <option name="LAST_COMMIT_MESSAGE" value="test: get all categories" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/app/handlers/cataloggetbycode/handler.go</url>
+          <line>21</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/go_hiring_challenge_1_2_0$TestService_GetCatalogByCode_in_github_com_mytheresa_go_hiring_challenge_app_usecase_catalogbycode.out" NAME="TestService_GetCatalogByCode in github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode Coverage Results" MODIFIED="1764017446091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/go_hiring_challenge_1_2_0$TestHandler_HandleGet_in_github_com_mytheresa_go_hiring_challenge_app_handlers_getcatalogbycode.out" NAME="TestHandler_HandleGet in github.com/mytheresa/go-hiring-challenge/app/handlers/getcatalogbycode Coverage Results" MODIFIED="1764019814583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

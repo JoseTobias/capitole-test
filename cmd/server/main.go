@@ -7,7 +7,9 @@ import (
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/catalogget"
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/cataloggetbycode"
 	"github.com/mytheresa/go-hiring-challenge/app/handlers/categoriesget"
+	"github.com/mytheresa/go-hiring-challenge/app/handlers/categorycreate"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/catalogbycode"
+	"github.com/mytheresa/go-hiring-challenge/app/usecase/createcategory"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/getcatalog"
 	"github.com/mytheresa/go-hiring-challenge/app/usecase/getcategories"
 	"github.com/mytheresa/go-hiring-challenge/repositories/categories"
@@ -54,11 +56,15 @@ func main() {
 	getCat := getcategories.NewGetCatalog(cat)
 	catGet := categoriesget.NewHandler(getCat, httpresp)
 
+	crtCtg := createcategory.NewService(cat)
+	ctgCrt := categorycreate.NewHandler(crtCtg, httpresp)
+
 	// Set up routing
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /catalog", ctlg.HandleGet)
 	mux.HandleFunc("GET /catalog/{code}", prd.HandleGet)
 	mux.HandleFunc("GET /categories", catGet.HandleGet)
+	mux.HandleFunc("POST /categories", ctgCrt.HandlePost)
 
 	// Set up the HTTP server
 	srv := &http.Server{
